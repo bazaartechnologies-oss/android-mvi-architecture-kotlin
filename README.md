@@ -4,7 +4,7 @@ Bazaar's Android Architecture
 ### What is MVI
 Like MVC, MVP or MVVM, MVI is an architectural design pattern that helps us better organize our code to create robust and maintainable applications. It is in the same family as Flux or Redux and was first introduced by André Medeiros. This acronym is formed by the contraction of the words Model, View and Intent.
 <p align="center">
-  <img src="https://github.com/MindorksOpenSource/MVI-Architecture-Android-Beginners/blob/master/art/banner-mvi-arch-beginners.png">
+  <img src="https://github.com/bazaartechnologies/Bazaar-Android-MVI-Architecture-Kotlin/blob/master/github/mvi_image.png">
 </p>
 
 ### Concept reference resources 
@@ -23,6 +23,10 @@ We need to replace google-services.json file with new Firebase project (If you a
 [RepoManager] -> [Repo Layers] -> [Service Layers] -> [Backend APIs] <br/>
 [RepoManager] -> [Repo Layers] -> [Service Layers] -> [DataBase]<br/>
 [RepoManager] -> [Repo Layers] -> [SharePreference] <br/>
+
+<p align="center">
+  <img src="https://github.com/bazaartechnologies/Bazaar-Android-MVI-Architecture-Kotlin/blob/master/github/RepositoryPattern.png">
+</p>
 
 Multiple Backend<br/>
 Hide Repo, Service, DB, Backend layers from View and ViewModel. View has no knowledge whether we are storing data in Shared preference or calling api
