@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tech.bazaar.template.login.model.RotateTokenModel
 import com.tech.bazaar.template.AppApplication
@@ -14,11 +13,17 @@ import com.tech.bazaar.template.base.LogManager
 import com.tech.bazaar.template.base.abconfig.BazaarABConfig
 import com.tech.bazaar.template.base.manager.IRepoManager
 import com.tech.bazaar.template.base.model.BazaarUser
-import com.tech.bazaar.template.base.model.ApiState
+import com.tech.bazaar.template.base.mvicore.IModel
+import com.tech.bazaar.template.login.action.LoginIntent
 import com.tech.bazaar.template.login.model.LoginModel
 import com.tech.bazaar.template.login.model.LoginResponse
-import com.tech.bazaar.template.login.model.LoginResponseModel
+import com.tech.bazaar.template.login.state.LoginState
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
 class LoginViewModel @ViewModelInject constructor(
@@ -26,19 +31,41 @@ class LoginViewModel @ViewModelInject constructor(
     private val repoManager: IRepoManager,
     private val abConfig: BazaarABConfig,
     private val dispatcher: CoroutineDispatcher
-) : AndroidViewModel(application) {
+) : AndroidViewModel(application), IModel<LoginState, LoginIntent> {
 
     private val Log = LogManager.getInstance(javaClass.simpleName)
 
-    var loginLiveData = MutableLiveData<LoginResponseModel>()
+    override val intents: Channel<LoginIntent> = Channel(Channel.UNLIMITED)
+    private val _state = MutableStateFlow<LoginState>(LoginState.Idle)
+    override val state: StateFlow<LoginState>
+        get() = _state
+
+    init {
+        intentHandler()
+    }
 
     var phone = ObservableField<String>()
     var password = ObservableField<String>()
 
-    fun isLoggedIn(): Boolean = repoManager.isLoggedIn()
+    /**
+     * Observe Intents/ Actions from View layer
+     */
+    private fun intentHandler() {
+        viewModelScope.launch {
+            intents.consumeAsFlow().collect {
+                when (it) {
+                    LoginIntent.DoLogin -> login()
+                }
+            }
+        }
+    }
 
-    fun login() {
+    private fun updateState(loginState: LoginState) {
+        _state.value = loginState
+    }
 
+
+    private fun login() {
         val phone = phone.get()?.trim()
         val password = password.get()
 
@@ -49,8 +76,7 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     private fun loginApi(email: String, password: String) {
-
-        loginMessage(ApiState.IN_PROGRESS)
+        updateState(LoginState.Loading)
 
         viewModelScope.launch {
             try {
@@ -67,23 +93,17 @@ class LoginViewModel @ViewModelInject constructor(
                             phone = data.userInfo.phone
                         )
                     )
-                    loginMessage(ApiState.SUCCESS)
+                    updateState(LoginState.LoginSuccess(data))
                 } else {
-                    loginMessage(
-                        ApiState.FAILURE,
-                        false,
-                        AppApplication.appContext.getString(R.string.login_failure_not_found_message)
-                    )
+                    updateState(LoginState.LoginError(AppApplication.appContext.getString(R.string.login_failure_not_found_message)))
                 }
             } catch (error: Exception) {
-                loginMessage(
-                    ApiState.FAILURE,
-                    false,
-                    AppApplication.appContext.getString(R.string.network_failure_message)
-                )
+                updateState(LoginState.LoginError(AppApplication.appContext.getString(R.string.network_failure_message)))
             }
         }
     }
+
+    fun isLoggedIn(): Boolean = repoManager.isLoggedIn()
 
     fun rotateTokenIfRequired() {
         val refresh = repoManager.user?.refreshToken
@@ -129,11 +149,4 @@ class LoginViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun loginMessage(apiState: ApiState, isSuccess: Boolean = true, message: String = "") {
-        val loginResponse = LoginResponseModel()
-        loginResponse.apiState = apiState
-        loginResponse.success = isSuccess
-        loginResponse.message = message
-        loginLiveData.postValue(loginResponse)
-    }
 }

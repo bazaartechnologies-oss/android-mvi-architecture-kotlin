@@ -11,20 +11,25 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.tech.bazaar.template.R
 import com.tech.bazaar.template.base.model.ApiState
+import com.tech.bazaar.template.base.mvicore.IView
 import com.tech.bazaar.template.base.view.BaseFragment
 import com.tech.bazaar.template.databinding.FragmentLoginBinding
 import com.tech.bazaar.template.dialog.BazaarToast
 import com.tech.bazaar.template.extention.hide
 import com.tech.bazaar.template.extention.show
 import com.tech.bazaar.template.extention.showMessageInToastCenter
-import com.tech.bazaar.template.login.model.LoginResponseModel
+import com.tech.bazaar.template.login.action.LoginIntent
+import com.tech.bazaar.template.login.state.LoginState
 import com.tech.bazaar.template.login.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment() {
+class LoginFragment : BaseFragment(), IView<LoginState> {
 
     private lateinit var binding: FragmentLoginBinding
 
@@ -41,7 +46,7 @@ class LoginFragment : BaseFragment() {
         initBinding()
         initUI()
         onClicked()
-        observeLoginLiveData()
+        observeLoginState()
         return binding.root
     }
 
@@ -90,36 +95,20 @@ class LoginFragment : BaseFragment() {
         }
 
         binding.loginBtn.setOnClickListener {
-            loginViewModel.login()
+            mainScope.launch {
+                loginViewModel.intents.send(LoginIntent.DoLogin)
+            }
         }
     }
 
-    private fun observeLoginLiveData() {
-
-        val observer = Observer<LoginResponseModel> {
-
-            when (it?.apiState) {
-                ApiState.IN_PROGRESS -> {
-                    binding.loginProgressBar.show()
-                }
-
-                ApiState.FAILURE -> {
-                    binding.loginProgressBar.hide()
-                    toast = binding.loginRoot.showMessageInToastCenter(context, it.message)
-                }
-
-                ApiState.SUCCESS -> {
-                    binding.loginProgressBar.hide()
-//                    navigate()
-                }
-                else -> {
-                }
+    private fun observeLoginState() {
+        mainScope.launch {
+            // Triggers the flow and starts listening for values
+            loginViewModel.state.collect { uiState ->
+                // New value received
+                render(uiState)
             }
         }
-
-        loginViewModel
-            .loginLiveData
-            .observe(viewLifecycleOwner, observer)
     }
 
     override fun setStatusBarColor(): Int {
@@ -129,6 +118,25 @@ class LoginFragment : BaseFragment() {
     override fun onPause() {
         toast?.cancelToast()
         super.onPause()
+    }
+
+    override fun render(uiState: LoginState) {
+        when (uiState) {
+            is LoginState.Idle -> {
+                binding.loginProgressBar.hide()
+            }
+            is LoginState.Loading -> {
+                binding.loginProgressBar.show()
+            }
+            is LoginState.LoginSuccess -> {
+                binding.loginProgressBar.hide()
+//                    navigate()
+            }
+            is LoginState.LoginError -> {
+                binding.loginProgressBar.hide()
+                toast = binding.loginRoot.showMessageInToastCenter(context, uiState.error)
+            }
+        }
     }
 
 }

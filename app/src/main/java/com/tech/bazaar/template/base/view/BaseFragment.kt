@@ -7,9 +7,14 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.tech.bazaar.template.AppApplication
 import com.tech.bazaar.template.extention.hideKeyboardFromCurrentFocus
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.isActive
 
 abstract class BaseFragment : Fragment() {
 
+    var mainScope = MainScope()
+        private set
     lateinit var navController: NavController
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -23,6 +28,8 @@ abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (!mainScope.isActive) mainScope = MainScope()
+
         navController = Navigation.findNavController(
             view
         )
@@ -33,6 +40,11 @@ abstract class BaseFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         hideKeyboardFromCurrentFocus()
+    }
+
+    override fun onDestroyView() {
+        mainScope.cancel()
+        super.onDestroyView()
     }
 
     fun getApplication(): AppApplication {
