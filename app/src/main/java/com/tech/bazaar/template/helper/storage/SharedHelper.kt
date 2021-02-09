@@ -15,9 +15,6 @@ class SharedHelper @Inject constructor(
 ) {
     companion object {
         private lateinit var userPreferences: SharedPreferences
-        private lateinit var orderPreferences: SharedPreferences
-        private lateinit var revisitPreferences: SharedPreferences
-
     }
 
     fun clearSharedPreferences() {

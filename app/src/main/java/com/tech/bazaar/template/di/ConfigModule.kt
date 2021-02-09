@@ -6,8 +6,9 @@ import com.tech.bazaar.template.analytics.AppEvents
 import com.tech.bazaar.template.base.FireBaseGet
 import com.tech.bazaar.template.base.abconfig.BazaarABConfig
 import com.tech.bazaar.template.base.abconfig.BazaarAbTestRemoteConfig
+import com.tech.bazaar.template.base.manager.IRepoManager
 import com.tech.bazaar.template.environment.AppEnvironment
-import com.tech.bazaar.template.helper.storage.BazaarUserRepository
+import com.tech.bazaar.template.helper.storage.IBazaarUserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +27,7 @@ class ConfigModule {
         @ApplicationContext context: Context,
         eventBus: EventBus,
         appEnvironment: AppEnvironment,
-        bazaarUserRepository: BazaarUserRepository
+        bazaarUserRepository: IBazaarUserRepository
     ): AnalyticsInitializer {
         return AnalyticsInitializer(context, eventBus, appEnvironment, bazaarUserRepository)
     }

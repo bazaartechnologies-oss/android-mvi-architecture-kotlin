@@ -1,4 +1,4 @@
-package com.tech.bazaar.template.login.viewmodel
+package com.tech.bazaar.template.login.repo
 
 import com.tech.bazaar.template.login.model.RotateTokenModel
 import com.tech.bazaar.template.login.model.LoginModel
@@ -7,15 +7,15 @@ import com.tech.bazaar.template.retrofit.BackendApiService
 import retrofit2.Response
 import javax.inject.Inject
 
-class LoginRepository @Inject constructor(
+class LoginService @Inject constructor(
     private val apiService: BackendApiService
-) {
+) : ILoginService {
 
-    suspend fun login(loginModel: LoginModel): Response<LoginResponse> {
+    override suspend fun login(loginModel: LoginModel): Response<LoginResponse> {
         return apiService.login(loginModel)
     }
 
-    suspend fun rotateToken(tokenModel: RotateTokenModel): Response<LoginResponse> {
+    override suspend fun rotateToken(tokenModel: RotateTokenModel): Response<LoginResponse> {
         return apiService.rotateToken(tokenModel)
     }
 }

@@ -12,20 +12,18 @@ import com.tech.bazaar.template.R
 import com.tech.bazaar.template.base.CoroutineDispatcher
 import com.tech.bazaar.template.base.LogManager
 import com.tech.bazaar.template.base.abconfig.BazaarABConfig
+import com.tech.bazaar.template.base.manager.IRepoManager
 import com.tech.bazaar.template.base.model.BazaarUser
 import com.tech.bazaar.template.base.model.ApiState
-import com.tech.bazaar.template.helper.storage.BazaarUserRepository
 import com.tech.bazaar.template.login.model.LoginModel
 import com.tech.bazaar.template.login.model.LoginResponse
 import com.tech.bazaar.template.login.model.LoginResponseModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.io.IOException
 
 class LoginViewModel @ViewModelInject constructor(
     application: Application,
-    private val loginRepository: LoginRepository,
-    private val userRepository: BazaarUserRepository,
+    private val repoManager: IRepoManager,
     private val abConfig: BazaarABConfig,
     private val dispatcher: CoroutineDispatcher
 ) : AndroidViewModel(application) {
@@ -37,7 +35,7 @@ class LoginViewModel @ViewModelInject constructor(
     var phone = ObservableField<String>()
     var password = ObservableField<String>()
 
-    fun isLoggedIn(): Boolean = userRepository.isLoggedIn()
+    fun isLoggedIn(): Boolean = repoManager.isLoggedIn()
 
     fun login() {
 
@@ -50,21 +48,17 @@ class LoginViewModel @ViewModelInject constructor(
         loginApi(phone, password)
     }
 
-    private fun loginApi(phone: String, password: String) {
-        loginApiV1(phone, password)
-    }
-
-    private fun loginApiV1(email: String, password: String) {
+    private fun loginApi(email: String, password: String) {
 
         loginMessage(ApiState.IN_PROGRESS)
 
         viewModelScope.launch {
             try {
                 val response =
-                    loginRepository.login(LoginModel(email, password))
+                    repoManager.login(LoginModel(email, password))
                 if (response.isSuccessful && response.body() != null) {
                     val data = response.body() as LoginResponse
-                    userRepository.saveUser(
+                    repoManager.saveUser(
                         BazaarUser(
                             accessToken = data.legacyToken,
                             token = data.token,
@@ -92,24 +86,24 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     fun rotateTokenIfRequired() {
-        val refresh = userRepository.user?.refreshToken
+        val refresh = repoManager.user?.refreshToken
         if (refresh.isNullOrEmpty()) {
             rotateTokenSilently()
         }
     }
 
     fun rotateTokenSilently() {
-        val phone = userRepository.user?.phone ?: ""
-        val token = userRepository.user?.token ?: ""
+        val phone = repoManager.user?.phone ?: ""
+        val token = repoManager.user?.token ?: ""
 
         CoroutineScope(dispatcher.io()).launch {
             try {
                 val response =
-                    loginRepository.rotateToken(RotateTokenModel(phone, token))
+                    repoManager.rotateToken(RotateTokenModel(phone, token))
                 if (response.isSuccessful && response.body() != null) {
                     Log.i("Get Token background success")
                     val data = response.body() as LoginResponse
-                    val user = userRepository.user
+                    val user = repoManager.user
                     user?.let {
                         val updatedUser =
                             BazaarUser(
@@ -126,7 +120,7 @@ class LoginViewModel @ViewModelInject constructor(
                                 data.refreshToken,
                                 data.expiresAt
                             )
-                        userRepository.saveUser(updatedUser)
+                        repoManager.saveUser(updatedUser)
                     }
                 }
             } catch (error: Exception) {

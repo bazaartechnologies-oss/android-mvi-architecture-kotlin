@@ -5,7 +5,8 @@ import com.tech.bazaar.template.AppApplication
 import com.tech.bazaar.template.BazaarConstants.BACKEND_URL
 import com.tech.bazaar.template.BuildConfig
 import com.tech.bazaar.template.base.abconfig.BazaarABConfig
-import com.tech.bazaar.template.helper.storage.BazaarUserRepository
+import com.tech.bazaar.template.base.manager.IRepoManager
+import com.tech.bazaar.template.helper.storage.IBazaarUserRepository
 import com.tech.bazaar.template.retrofit.BackendApiService
 import com.tech.bazaar.template.retrofit.interceptor.BackendInterceptor
 import com.tech.bazaar.template.retrofit.interceptor.NoConnectionInterceptor
@@ -81,7 +82,7 @@ object NetworkModule {
     fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
-    fun provideBackendInterceptor(userRepository: BazaarUserRepository, abConfig: BazaarABConfig): BackendInterceptor {
+    fun provideBackendInterceptor(userRepository: IBazaarUserRepository, abConfig: BazaarABConfig): BackendInterceptor {
         return BackendInterceptor(userRepository, abConfig)
     }
 

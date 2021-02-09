@@ -11,7 +11,7 @@ import com.tech.bazaar.template.base.LogManager
 import com.tech.bazaar.template.base.abconfig.BazaarABConfig
 import com.tech.bazaar.template.base.model.BazaarUser
 import com.tech.bazaar.template.base.model.ErrorResponse
-import com.tech.bazaar.template.helper.storage.BazaarUserRepository
+import com.tech.bazaar.template.helper.storage.IBazaarUserRepository
 import com.tech.bazaar.template.login.model.LoginResponse
 import com.tech.bazaar.template.retrofit.BackendApiService
 import com.tech.bazaar.template.retrofit.RefreshTokenExpiredException
@@ -29,7 +29,7 @@ import javax.inject.Singleton
 class ResponseInterceptor @Inject constructor(
     @ApplicationContext private val context: Context,
     private val backendApiService: Lazy<BackendApiService>,
-    private val userRepository: BazaarUserRepository,
+    private val userRepository: IBazaarUserRepository,
     private val abConfig: BazaarABConfig
 ) : Interceptor {
 

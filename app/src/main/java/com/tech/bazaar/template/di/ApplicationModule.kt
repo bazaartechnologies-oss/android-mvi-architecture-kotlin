@@ -10,12 +10,16 @@ import com.tech.bazaar.template.environment.AppEnvironment
 import com.tech.bazaar.template.environment.AppEnvironmentProvider
 import com.tech.bazaar.template.environment.EnvironmentProvider
 import com.tech.bazaar.template.helper.ImageSequentialLoader
+import com.tech.bazaar.template.helper.storage.BazaarUserRepository
+import com.tech.bazaar.template.helper.storage.IBazaarUserRepository
+import com.tech.bazaar.template.helper.storage.SharedHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Calendar
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -67,4 +71,9 @@ class ApplicationModule {
         return appEnvironmentProvider.getEnvironment()
     }
 
+    @Provides
+    @Singleton
+    fun provideBazaarUserRepository(@ApplicationContext context: Context, sharedHelper: SharedHelper): IBazaarUserRepository {
+        return BazaarUserRepository(context, sharedHelper)
+    }
 }

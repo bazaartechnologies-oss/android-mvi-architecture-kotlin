@@ -14,9 +14,9 @@ import javax.inject.Singleton
 class BazaarUserRepository @Inject constructor(
     @ApplicationContext private val context: Context,
     private val sharedHelper: SharedHelper
-) {
+): IBazaarUserRepository {
 
-    var user: BazaarUser?
+    override var user: BazaarUser? = null
         private set
 
 
@@ -24,7 +24,7 @@ class BazaarUserRepository @Inject constructor(
         user = getBazaarUser()
     }
 
-    fun saveUser(bazaarUser: BazaarUser) {
+    override fun saveUser(bazaarUser: BazaarUser) {
         user = bazaarUser // update cached user
         val preferences = (context as AppApplication).getUserPreferences()
         val editor: SharedPreferences.Editor
@@ -34,13 +34,13 @@ class BazaarUserRepository @Inject constructor(
         editor.commit()
     }
 
-    fun getBazaarUser(): BazaarUser? {
+    override fun getBazaarUser(): BazaarUser? {
         val userPreference = (context as AppApplication).getUserPreferences()
         val userJson = userPreference.getString(USER_KEY, "");
         return Gson().fromJson(userJson, BazaarUser::class.java)
     }
 
-    fun isLoggedIn(): Boolean {
+    override fun isLoggedIn(): Boolean {
         val accessToken = user?.token
         val authToken = user?.authToken
         val userName = user?.firstName
@@ -52,11 +52,11 @@ class BazaarUserRepository @Inject constructor(
         return true
     }
 
-    fun clearUserCache() {
+    override fun clearUserCache() {
         user = null
     }
 
-    fun onLogout() {
+    override fun onLogout() {
         clearUserCache()
         sharedHelper.clearSharedPreferences()
     }

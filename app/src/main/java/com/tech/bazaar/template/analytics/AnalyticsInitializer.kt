@@ -7,7 +7,7 @@ import com.apptimize.ApptimizeOptions
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.tech.bazaar.template.BuildConfig
 import com.tech.bazaar.template.environment.AppEnvironment
-import com.tech.bazaar.template.helper.storage.BazaarUserRepository
+import com.tech.bazaar.template.helper.storage.IBazaarUserRepository
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -15,7 +15,7 @@ class AnalyticsInitializer(
     private val context: Context,
     private val eventBus: EventBus,
     private val appEnvironment: AppEnvironment,
-    private val bazaarUserRepository: BazaarUserRepository
+    private val bazaarUserRepository: IBazaarUserRepository
 ) {
 
     private lateinit var fireabaseAnalytics: FirebaseAnalytics

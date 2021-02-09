@@ -4,13 +4,13 @@ import com.tech.bazaar.template.BazaarConstants.AUTHORIZATION
 import com.tech.bazaar.template.BazaarConstants.BEARER
 import com.tech.bazaar.template.BazaarConstants.LEGACY_TOKEN
 import com.tech.bazaar.template.base.abconfig.BazaarABConfig
-import com.tech.bazaar.template.helper.storage.BazaarUserRepository
+import com.tech.bazaar.template.helper.storage.IBazaarUserRepository
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
 class BackendInterceptor @Inject constructor(
-    private val userRepository: BazaarUserRepository,
+    private val userRepository: IBazaarUserRepository,
     private val abConfig: BazaarABConfig
 ) : Interceptor {
 
