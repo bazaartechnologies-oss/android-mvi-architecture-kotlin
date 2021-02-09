@@ -13,37 +13,37 @@ Like MVC, MVP or MVVM, MVI is an architectural design pattern that helps us bett
 
 
 #### The app has following purpose:
-This application is a template repository for Android Application in "Bazaar Technologies". So whenever we want to create a new application from scratch we can create repository using this template.
-We need to change package name
-We need to add tokens, base url and other static content if needed
-We need to replace google-services.json file with new Firebase project (If you are not using firebase, then remove its code)
+This application is a template repository for Android Application in "Bazaar Technologies". So whenever we want to create a new application from scratch we can create repository using this template.<br/>
+We need to change package name<br/>
+We need to add tokens, base url and other static content if needed<br/>
+We need to replace google-services.json file with new Firebase project (If you are not using firebase, then remove its code)<br/>
 
 
 ### Repository Model:
-[RepoManager] -> [Repo Layers] -> [Service Layers] -> [Backend APIs]
-[RepoManager] -> [Repo Layers] -> [Service Layers] -> [DataBase]
-[RepoManager] -> [Repo Layers] -> [SharePreference]
+[RepoManager] -> [Repo Layers] -> [Service Layers] -> [Backend APIs] <br/>
+[RepoManager] -> [Repo Layers] -> [Service Layers] -> [DataBase]<br/>
+[RepoManager] -> [Repo Layers] -> [SharePreference] <br/>
 
-Multiple Backend
+Multiple Backend<br/>
 Hide Repo, Service, DB, Backend layers from View and ViewModel. View has no knowledge whether we are storing data in Shared preference or calling api
-Documentation Easy
+Documentation Easy<br/><br/>
 
-All layers are interfaces, so multiple implementations
-Mock implementation can easily be made for integration testing
+All layers are interfaces, so multiple implementations<br/>
+Mock implementation can easily be made for integration testing<br/>
 
-Why Manager:
-View Model will doesn't have to know about repo layers and further.
-Will help in converting it into SDK
-If we remove any repo layer, No effects on ViewModel
+Why Manager:<br/>
+View Model will doesn't have to know about repo layers and further.<br/>
+Will help in converting it into SDK<br/>
+If we remove any repo layer, No effects on ViewModel<br/>
 
-Why Repo Layer:
-Repo layer can integrate multiple services in it.
-Remapping of data is easy
+Why Repo Layer:<br/>
+Repo layer can integrate multiple services in it.<br/>
+Remapping of data is easy<br/><br/>
 
-Why Service Layer: 
-To hide backend layer from Repo Layers
-Single responsibility for each service
-No data manipulation and mapping
+Why Service Layer: <br/>
+To hide backend layer from Repo Layers<br/>
+Single responsibility for each service<br/>
+No data manipulation and mapping<br/><br/>
 
 
 ## Objectives
