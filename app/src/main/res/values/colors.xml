@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F2F2F2</color>
+    <color name="colorPrimaryDark">#F2F2F2</color>
+    <color name="colorAccent">#001A44</color>
+    <color name="white">#FFFFFF</color>
+    <color name="dark_blue">#001A44</color>
+    <color name="dark_gray">#69767B</color>
+    <color name="gray">#C8D4D9</color>
+    <color name="black">#000000</color>
+    <color name="show_password">#0055DD</color>
+    // black with 50% opacity
+</resources>

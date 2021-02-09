@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "923624371168",
+    "project_id": "bazaar-android-template",
+    "storage_bucket": "bazaar-android-template.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923624371168:android:82092ed73eae49ede5b185",
+        "android_client_info": {
+          "package_name": "com.tech.bazaar.template"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923624371168-339uujmhj30pno1ig9ffs50aihj8aj8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqNakQxIhKbkzSSRMTzjk8YJxl1qnmASo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923624371168-339uujmhj30pno1ig9ffs50aihj8aj8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

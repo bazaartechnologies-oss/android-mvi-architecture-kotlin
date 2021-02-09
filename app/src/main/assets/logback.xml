@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+
+    <property name="LOG_DIR" value="${DATA_DIR}" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- active log file -->
+        <file>${LOG_DIR}/log.txt</file>
+        <encoder>
+            <pattern>%d{"yyyy-MM-dd HH:mm:ss.SSS Z"} %logger{36} %-1level[%thread] - %msg%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- hourly rollover period -->
+            <fileNamePattern>${LOG_DIR}/log.%d{yyyy-MM-dd_HH}.txt.gz</fileNamePattern>
+
+            <!-- keep 24 hours' worth of history -->
+            <maxHistory>24</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="LOGCAT" class="ch.qos.logback.classic.android.LogcatAppender">
+        <encoder>
+            <pattern>[%thread] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="TRACE">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="LOGCAT" />
+    </root>
+</configuration>

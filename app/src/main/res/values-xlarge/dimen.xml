@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_5">5sp</dimen>
+    <dimen name="size_8">8sp</dimen>
+    <dimen name="size_10">10sp</dimen>
+    <dimen name="size_12">12sp</dimen>
+    <dimen name="size_14">14sp</dimen>
+    <dimen name="size_15">15sp</dimen>
+    <dimen name="size_16">16sp</dimen>
+    <dimen name="size_17">17sp</dimen>
+    <dimen name="size_18">18sp</dimen>
+    <dimen name="size_19">19sp</dimen>
+    <dimen name="size_20">20sp</dimen>
+    <dimen name="logo_name_size">200sp</dimen>
+    <dimen name="email_margin">16dp</dimen>
+    <dimen name="margin_password">30dp</dimen>
+    <dimen name="margin_phone">8dp</dimen>
+    <dimen name="margin_title">35dp</dimen>
+    <dimen name="margin_image">25dp</dimen>
+    <dimen name="title_tv_size">24sp</dimen>
+    <dimen name="login_image_margin">20dp</dimen>
+    <dimen name="login_phone_margin">16dp</dimen>
+    <dimen name="login_btn_margin">60dp</dimen>
+    <dimen name="login_phone_pad">16dp</dimen>
+    <dimen name="qty_align">0.75</dimen>
+</resources>

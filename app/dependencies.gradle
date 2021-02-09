@@ -1,0 +1,67 @@
+ext {
+
+    // versions
+    minVersion = 18
+    compileVersion = 29
+    targetVersion = 29
+    buildToolsVersion = "29.0.2"
+
+    // application id
+    applicationId = "com.tech.bazaar.template"
+
+    // java version
+    javaSourceCompatibility = 1.8
+    javaTargetCompatibility = 1.8
+
+    def coilVersion = '1.1.1'
+    def lifecycleVersion = '2.2.0'
+    def viewModelVersion = '2.2.0'
+    def pagingVersion = '2.1.2'
+    def coroutinesVersion = '1.4.2'
+    def navigationVersion = "2.3.2"
+    def materialVersion = "1.2.1"
+    def retrofitVersion = '2.9.0'
+    def slf4jVersion = '1.7.25'
+    def logbackVersion = '2.0.0'
+
+    lifecycleDependency = [
+            lifecycle: "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    ]
+
+    viewModelDependency = [
+            viewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModelVersion"
+    ]
+
+    pagingDependency = [
+            paging: "android.arch.paging:runtime:$pagingVersion"
+    ]
+
+    coroutinesDependency = [
+            coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
+            coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    ]
+
+    coilDependency = [
+            coil: "io.coil-kt:coil:$coilVersion"
+    ]
+
+    navigationDependency = [
+            navigationFragment: "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
+            navigationUiKit   : "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    ]
+
+    materialDependency = [
+            material: "com.google.android.material:material:$materialVersion"
+    ]
+
+    retrofitDependency = [
+            retrofit                    : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitGsonConverterFactory: "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    ]
+
+    logsDependency = [
+            slf4j       : "org.slf4j:slf4j-api:$slf4jVersion",
+            logback     : "com.github.tony19:logback-android:$logbackVersion"
+    ]
+
+}

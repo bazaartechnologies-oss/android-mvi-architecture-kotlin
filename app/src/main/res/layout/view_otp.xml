@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayoutPinView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/view_4x"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:weightSum="6">
+
+    <EditText
+        android:id="@+id/editTextPin"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:imeOptions="actionDone"
+        android:inputType="numberPassword"
+        android:maxLength="6" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPinCharacter1"
+        style="@style/enter_pin_box_style" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPinCharacter2"
+        style="@style/enter_pin_box_style" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPinCharacter3"
+        style="@style/enter_pin_box_style" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPinCharacter4"
+        style="@style/enter_pin_box_style" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPinCharacter5"
+        style="@style/enter_pin_box_style" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPinCharacter6"
+        style="@style/enter_pin_box_style" />
+
+</LinearLayout>

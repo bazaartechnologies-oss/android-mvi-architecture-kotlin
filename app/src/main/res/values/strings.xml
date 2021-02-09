@@ -1,0 +1,35 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Bazaar Android Architecture</string>
+    <string name="map_key">sada</string>
+
+    <string name="login_text">LOGIN</string>
+    <string name="login_phone_hint_phone">PHONE NUMBER</string>
+    <string name="login_password_hint">PASSWORD</string>
+    <string name="show_password">Show Password</string>
+    <string name="hide_password">Hide Password</string>
+    <string name="profile_log_out">Logout</string>
+    <string name="profile_log_out_button_text">LOGOUT</string>
+    <string name="dialog_message">Are you sure you want to logout from your account?</string>
+    <string name="dialog_go_back" tools:ignore="ButtonCase">CANCEL</string>
+
+    <string name="network_failure_message">Connection mai rukaawat hai, dubaara koshish karein</string>
+    <string name="login_failure_not_found_message">Phone number ya password durust nahi. Dobara koshish karien.</string>
+
+    <string name="naye_features">Naye Features!</string>
+    <string name="update_message">Mazeed behtar features istemal \n karne ke liye abhi app update karien</string>
+    <string name="update_button">Update Karein</string>
+
+    <string name="setting_dialog_title">Location request</string>
+    <string name="setting_dialog_message">Account request karnay ke liye location permission dena zaroori hai.</string>
+    <string name="setting_dialog_button_tittle">SETTINGS</string>
+    <string name="helpline_go_back" tools:ignore="ButtonCase">CANCEL</string>
+
+    <string name="new_account_dialog_title">Naya account?</string>
+    <string name="new_account_dialog_button">NAYA ACCOUNT BANAAEN</string>
+
+    <!-- Quantity Alert Text -->
+
+    <string name="logout_title">Dobara login karein</string>
+    <string name="logout_message">Aap ka session expire hogaya hai, App istemaal karne ke liye abhi login karein.</string>
+    <string name="logout_button">LOGIN karein</string>
+</resources>

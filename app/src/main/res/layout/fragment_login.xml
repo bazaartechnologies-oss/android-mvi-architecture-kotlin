@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mViewModel"
+            type="com.tech.bazaar.template.login.viewmodel.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loginRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".auth.view.LoginActivity">
+
+        <ImageView
+            android:id="@+id/bazaar_illustration"
+            android:layout_width="136dp"
+            android:layout_height="136dp"
+            android:layout_marginTop="@dimen/view_5x"
+            android:gravity="center"
+            android:src="@drawable/bazaar_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/view_4x"
+            android:layout_marginTop="@dimen/view_4x"
+            android:layout_marginEnd="@dimen/view_4x"
+            android:focusable="true"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bazaar_illustration">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneNumberInput"
+                style="@style/StandardEditTextView"
+                android:backgroundTint="@color/gray"
+                android:cursorVisible="true"
+                android:ems="10"
+                android:hint="@string/login_phone_hint_phone"
+                android:inputType="number"
+                android:maxLength="11"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/view_4x"
+                android:singleLine="true"
+                android:text="@={mViewModel.phone}"
+                tools:targetApi="lollipop" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/view_4x"
+            android:layout_marginTop="@dimen/view_4x"
+            android:layout_marginEnd="@dimen/view_4x"
+            android:focusable="true"
+            android:visibility="visible"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumber">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordInput"
+                style="@style/StandardEditTextView"
+                android:backgroundTint="@color/gray"
+                android:cursorVisible="true"
+                android:ems="10"
+                android:hint="@string/login_password_hint"
+                android:inputType="textPassword"
+                android:maxLength="25"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/view_4x"
+                android:singleLine="true"
+                android:text="@={mViewModel.password}"
+                tools:targetApi="lollipop" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_2x"
+            android:layout_marginEnd="@dimen/view_6x"
+            android:fontFamily="@font/intermedium"
+            android:letterSpacing="0.02"
+            android:padding="@dimen/view_2x"
+            android:text="@string/show_password"
+            android:textAllCaps="true"
+            android:textColor="@color/show_password"
+            android:textSize="@dimen/size_12"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/password"
+            tools:targetApi="lollipop"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/hide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_2x"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/intermedium"
+            android:letterSpacing="0.02"
+            android:padding="@dimen/view_2x"
+            android:text="@string/hide_password"
+            android:textAllCaps="true"
+            android:textColor="@color/show_password"
+            android:textSize="@dimen/size_12"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/password" />
+
+        <TextView
+            android:id="@+id/login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/black_round_corner"
+            android:fontFamily="@font/intermedium"
+            android:gravity="center"
+            android:letterSpacing="0.09"
+            android:text="@string/login_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password"
+            tools:targetApi="lollipop" />
+
+        <ProgressBar
+            android:id="@+id/loginProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

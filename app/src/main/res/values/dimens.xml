@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_5">5sp</dimen>
+    <dimen name="size_8">8sp</dimen>
+    <dimen name="size_10">10sp</dimen>
+    <dimen name="size_12">12sp</dimen>
+    <dimen name="size_14">14sp</dimen>
+    <dimen name="size_15">15sp</dimen>
+    <dimen name="size_16">16sp</dimen>
+    <dimen name="size_17">17sp</dimen>
+    <dimen name="size_18">18sp</dimen>
+    <dimen name="size_19">19sp</dimen>
+    <dimen name="size_20">20sp</dimen>
+    <dimen name="size_40">40sp</dimen>
+    <dimen name="logo_name_size">40sp</dimen>
+    <dimen name="category_image_size">112dp</dimen>
+    <dimen name="category_tile_height">156dp</dimen>
+
+    <dimen name="view_1x">4dp</dimen>
+    <dimen name="view_2x">8dp</dimen>
+    <dimen name="view_3x">12dp</dimen>
+    <dimen name="view_4x">16dp</dimen>
+    <dimen name="view_5x">20dp</dimen>
+    <dimen name="view_6x">24dp</dimen>
+    <dimen name="view_7x">28dp</dimen>
+    <dimen name="view_8x">32dp</dimen>
+    <dimen name="view_9x">36dp</dimen>
+    <dimen name="view_10x">40dp</dimen>
+    <dimen name="view_11x">44dp</dimen>
+    <dimen name="view_12x">48dp</dimen>
+    <dimen name="view_13x">52dp</dimen>
+    <dimen name="view_14x">56dp</dimen>
+    <dimen name="view_15x">60dp</dimen>
+    <dimen name="email_margin">16dp</dimen>
+    <dimen name="margin_password">30dp</dimen>
+    <dimen name="margin_phone">8dp</dimen>
+    <dimen name="margin_title">35dp</dimen>
+    <dimen name="margin_image">25dp</dimen>
+    <dimen name="title_tv_size">24sp</dimen>
+    <dimen name="login_image_margin">20dp</dimen>
+    <dimen name="login_phone_margin">16dp</dimen>
+    <dimen name="login_btn_margin">40dp</dimen>
+    <dimen name="btn_height">40dp</dimen>
+    <dimen name="login_phone_pad">16dp</dimen>
+    <dimen name="qty_align">0.73</dimen>
+    <dimen name="toolbar_height">72dp</dimen>
+</resources>
