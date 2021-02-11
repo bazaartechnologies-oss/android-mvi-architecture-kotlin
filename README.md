@@ -4,7 +4,7 @@ Bazaar's Android Architecture
 ### What is MVI
 Like MVC, MVP or MVVM, MVI is an architectural design pattern that helps us better organize our code to create robust and maintainable applications. It is in the same family as Flux or Redux and was first introduced by André Medeiros. This acronym is formed by the contraction of the words Model, View and Intent.
 <p align="center">
-  <img src='github/mvi_image.png'/>
+  <img src="github/mvi_image.png"/>
 </p>
 
 ### Concept reference resources 
@@ -25,7 +25,7 @@ We need to replace google-services.json file with new Firebase project (If you a
 [RepoManager] -> [Repo Layers] -> [SharePreference] <br/>
 
 <p align="center">
-  <img src='github/RepositoryPattern.png'/>
+  <img src="github/RepositoryPattern.png"/>
 </p>
 
 Multiple Backend<br/>
