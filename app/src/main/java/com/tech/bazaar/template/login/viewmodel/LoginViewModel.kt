@@ -54,7 +54,7 @@ class LoginViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             intents.consumeAsFlow().collect {
                 when (it) {
-                    LoginIntent.DoLogin -> login()
+                    is LoginIntent.DoLogin -> login()
                 }
             }
         }

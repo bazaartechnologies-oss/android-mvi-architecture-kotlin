@@ -10,10 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import com.tech.bazaar.template.R
-import com.tech.bazaar.template.base.model.ApiState
 import com.tech.bazaar.template.base.mvicore.IView
 import com.tech.bazaar.template.base.view.BaseFragment
 import com.tech.bazaar.template.databinding.FragmentLoginBinding
@@ -120,8 +117,8 @@ class LoginFragment : BaseFragment(), IView<LoginState> {
         super.onPause()
     }
 
-    override fun render(uiState: LoginState) {
-        when (uiState) {
+    override fun render(state: LoginState) {
+        when (state) {
             is LoginState.Idle -> {
                 binding.loginProgressBar.hide()
             }
@@ -134,7 +131,7 @@ class LoginFragment : BaseFragment(), IView<LoginState> {
             }
             is LoginState.LoginError -> {
                 binding.loginProgressBar.hide()
-                toast = binding.loginRoot.showMessageInToastCenter(context, uiState.error)
+                toast = binding.loginRoot.showMessageInToastCenter(context, state.error)
             }
         }
     }
